@@ -13,6 +13,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 header h1 {
@@ -23,7 +24,7 @@ header h1 {
 
 nav a {
   color: white;
-  margin-left: 1.5rem;
+  margin-left: 1rem;
   text-decoration: none;
   font-weight: bold;
   font-size: 0.95rem;
@@ -37,7 +38,7 @@ nav a:hover {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  padding: 2rem;
+  padding: 1rem;
   box-sizing: border-box;
 }
 
@@ -101,4 +102,37 @@ footer {
   font-size: 0.85rem;
   background: #003d7c;
   color: white;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  aside {
+    order: 2;
+    width: 100%;
+    padding-right: 0;
+    margin-top: 1rem;
+  }
+
+  main {
+    order: 1;
+    width: 100%;
+  }
+
+  header h1 {
+    width: 100%;
+    font-size: 1.5rem;
+  }
+
+  nav {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  nav a {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+  }
 }
