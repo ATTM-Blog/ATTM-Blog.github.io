@@ -1,42 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>According To The Model</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <title>Blog</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="site.js" defer></script>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>According To The Model</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+  <header></header>
   <div class="layout">
     <aside>
-      <h2>Browse</h2>
-      <div id="date-nav"></div>
-      <h3>Tags</h3>
-      <div id="tag-nav"></div>
-    </aside>
-    <main>
-      <input type="text" id="search" placeholder="Search posts...">
+      <input id="search" type="text" placeholder="Search..." />
       <div class="view-toggle">
-        <button data-view="all">All Posts</button>
-        <button data-view="archive">Archive</button>
-        <button data-view="tags">Tag Cloud</button>
+        <button onclick="showAll()">All</button>
+        <button onclick="showArchive()">Archive</button>
+        <button onclick="showTags()">Tags</button>
       </div>
-      <section id="posts"></section>
-      <div id="pagination"></div>
+      <div id="archive"></div>
+      <div id="tagCloud"></div>
+    </aside>
+    <main id="blogContainer">
+      <!-- Posts inserted here -->
     </main>
   </div>
-  <footer>
-    &copy; 2025 According To The Model Blog. All rights reserved.
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <footer></footer>
   <script src="main.js"></script>
 </body>
 </html>
