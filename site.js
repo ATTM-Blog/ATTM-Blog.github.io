@@ -1,6 +1,6 @@
 
-const BLOG_TITLE = "According To The Model";
-const COPYRIGHT_NOTICE = "© 2025 According To The Model Blog";
+const BLOG_TITLE = "According to the Model";
+const COPYRIGHT_NOTICE = "© 2025 According to the Model";
 
 const THEMES = {
   light: {
@@ -14,7 +14,7 @@ const THEMES = {
     font: "'Montserrat', sans-serif",
     background: "#111",
     foreground: "#fdfdfd",
-    accent: "#25555c",
+    accent: "#0050b3",
     navBg: "#222"
   }
 };
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
   if (header) {
     header.innerHTML = `
-      <img src="logo.png" alt="Logo" style="height: 240px;">
+      <img src="logo.png" alt="Logo" style="height: 120px;">
       <h1>${BLOG_TITLE}</h1>
       <nav>
         <a href="index.html">Home</a>

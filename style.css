@@ -3,9 +3,9 @@
 :root {
   --bg: #fdfdfd;
   --fg: #111;
-  --accent: #025555c;
+  --accent: #003d7c;
   --font-size: 16px;
-  --font-weight: 300;
+  --font-weight: 400;
   --nav-bg: #e0e8f0;
 }
 body {
@@ -27,8 +27,8 @@ header, footer {
   flex-wrap: wrap;
 }
 header h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 3rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 2rem;
   margin: 0;
 }
 header img {
