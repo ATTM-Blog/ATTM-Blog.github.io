@@ -1,93 +1,91 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Rajdhani:wght@700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Rajdhani:wght@700&family=Montserrat&display=swap');
 :root {
   --bg: #fdfdfd;
   --fg: #111;
-  --accent: #003d7c;
+  --accent: #25555c;
   --font-size: 16px;
   --font-weight: 400;
+  --nav-bg: #e0e8f0;
 }
-
 body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
+  font-family: 'Montserrat', sans-serif;
   background: var(--bg);
   color: var(--fg);
   font-size: var(--font-size);
   font-weight: var(--font-weight);
-  transition: background 0.3s, color 0.3s;
+  margin: 0;
+  line-height: 1.8;
 }
-
-header h1, h2, h3 {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
 header, footer {
-  padding: 1rem;
   background: var(--accent);
   color: #fff;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
-
+header h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 2rem;
+  margin: 0;
+}
+header img {
+  height: 120px;
+  margin-right: 1rem;
+}
+nav a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 1rem;
+  background: rgba(255,255,255,0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+nav a:hover {
+  background: rgba(255,255,255,0.3);
+}
 .layout {
   display: flex;
   flex-wrap: wrap;
-  padding: 1rem;
+  gap: 2rem;
+  padding: 2rem;
 }
-
 aside {
   flex: 0 0 240px;
-  padding-right: 2rem;
+  background: var(--nav-bg);
+  padding: 1rem;
+  border-radius: 8px;
 }
-
 main {
   flex: 1;
+  max-width: 800px;
 }
-
+article {
+  margin-bottom: 4rem;
+}
+article h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+article .tags {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.8rem;
+}
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+}
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;
+    padding: 1rem;
   }
-  aside {
-    order: 2;
-    width: 100%;
-    padding: 0;
-  }
-  main {
-    order: 1;
+  aside, main {
     width: 100%;
   }
-}
-
-@media print {
-  header, footer, aside, .view-toggle, #tagCloud, #archive {
-    display: none !important;
-  }
-  body {
-    color: #000;
-    background: #fff;
-  }
-  main {
-    width: 100%;
-    padding: 0;
-  }
-}
-
-body.dark {
-  --bg: #111;
-  --fg: #eee;
-}
-
-#controls button {
-  margin-right: 0.5rem;
-  padding: 0.3rem 0.6rem;
 }
