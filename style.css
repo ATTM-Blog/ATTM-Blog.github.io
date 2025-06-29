@@ -3,7 +3,7 @@
 :root {
   --bg: #fdfdfd;
   --fg: #111;
-  --accent: #003d7c;
+  --accent: #25555c;
   --font-size: 16px;
   --font-weight: 400;
   --nav-bg: #e0e8f0;
@@ -28,7 +28,7 @@ header, footer {
 }
 header h1 {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 2rem;
+  font-size: 3rem;
   margin: 0;
 }
 header img {
