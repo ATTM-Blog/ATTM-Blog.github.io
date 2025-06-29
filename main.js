@@ -10,7 +10,6 @@ async function loadPosts() {
     const dateTree = {};
 
     posts.forEach(post => {
-      // Render main blog post
       const article = document.createElement("article");
       article.innerHTML = `
         <h2>${post.title}</h2>
@@ -19,19 +18,16 @@ async function loadPosts() {
       `;
       postContainer.appendChild(article);
 
-      // Build tag cloud
       (post.tags || []).forEach(tag => {
         tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
       });
 
-      // Build date tree
       const [y, m, d] = post.date.split("-");
       if (!dateTree[y]) dateTree[y] = {};
       if (!dateTree[y][m]) dateTree[y][m] = [];
       dateTree[y][m].push(post.title);
     });
 
-    // Render aside (tag cloud + date tree)
     let asideHTML = "<h3>Tags</h3><div class='tag-cloud'>";
     for (let [tag, count] of tagMap.entries()) {
       asideHTML += `<span style="font-size:${0.8 + count * 0.1}rem;">#${tag}</span> `;
