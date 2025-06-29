@@ -1,47 +1,66 @@
 
-const BLOG_TITLE = "My IBM-Inspired Blog";
-const COPYRIGHT_NOTICE = "© 2025 My IBM-Inspired Blog";
-const LOGO_SRC = "logo.png";
+const BLOG_TITLE = "According To The Model";
+const COPYRIGHT_NOTICE = "© 2025 According To The Model Blog";
 
-function injectHeader() {
-  document.querySelector("header").innerHTML = `
-    <div style="display:flex;align-items:center;gap:1rem;">
-      <img src="${LOGO_SRC}" alt="Logo" style="height:40px;">
-      <h1>${BLOG_TITLE}</h1>
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <div id="controls">
-        <button onclick="toggleDarkMode()">🌓</button>
-        <button onclick="adjustFontSize(1)">A+</button>
-        <button onclick="adjustFontSize(-1)">A-</button>
-        <button onclick="adjustFontWeight()">Bold</button>
-      </div>
-    </nav>
+const THEMES = {
+  light: {
+    font: "'Montserrat', sans-serif",
+    background: "#fdfdfd",
+    foreground: "#111",
+    accent: "#25555c",
+    navBg: "#e0e8f0"
+  },
+  dark: {
+    font: "'Montserrat', sans-serif",
+    background: "#111",
+    foreground: "#fdfdfd",
+    accent: "#25555c",
+    navBg: "#222"
+  }
+};
+
+let currentTheme = localStorage.getItem("theme") || "light";
+
+function applyTheme(theme) {
+  const t = THEMES[theme];
+  document.body.style.fontFamily = t.font;
+  document.body.style.backgroundColor = t.background;
+  document.body.style.color = t.foreground;
+
+  const styleTag = document.getElementById("theme-style") || document.createElement("style");
+  styleTag.id = "theme-style";
+  styleTag.innerHTML = `
+    header, footer { background: ${t.accent}; }
+    aside { background: ${t.navBg}; }
+    nav a { color: ${t.foreground}; background: rgba(255,255,255,0.1); }
+    nav a:hover { background: rgba(255,255,255,0.3); }
   `;
+  if (!document.head.contains(styleTag)) document.head.appendChild(styleTag);
 }
 
-function injectFooter() {
-  document.querySelector("footer").innerHTML = COPYRIGHT_NOTICE;
-}
-
-function toggleDarkMode() {
-  document.body.classList.toggle('dark');
-}
-
-function adjustFontSize(delta) {
-  let size = parseFloat(getComputedStyle(document.body).fontSize);
-  size = Math.max(12, Math.min(24, size + delta));
-  document.body.style.setProperty('--font-size', size + 'px');
-}
-
-function adjustFontWeight() {
-  const currWeight = document.body.style.getPropertyValue('--font-weight');
-  document.body.style.setProperty('--font-weight', currWeight === '700' ? '400' : '700');
+function toggleTheme() {
+  currentTheme = currentTheme === "light" ? "dark" : "light";
+  localStorage.setItem("theme", currentTheme);
+  applyTheme(currentTheme);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  injectHeader();
-  injectFooter();
+  document.title = BLOG_TITLE;
+  applyTheme(currentTheme);
+  const header = document.querySelector("header");
+  if (header) {
+    header.innerHTML = `
+      <img src="logo.png" alt="Logo" style="height: 120px;">
+      <h1>${BLOG_TITLE}</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="#" onclick="toggleTheme()" title="Toggle light/dark mode">🌓</a>
+      </nav>
+    `;
+  }
+  const footer = document.querySelector("footer");
+  if (footer) {
+    footer.innerHTML = `<p>${COPYRIGHT_NOTICE}</p>`;
+  }
 });
