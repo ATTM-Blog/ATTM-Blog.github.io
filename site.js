@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
   if (header) {
     header.innerHTML = `
-      <img src="logo.png" alt="Logo" style="height: 120px;">
+      <img src="logo.png" alt="Logo" style="height: 240px;">
       <h1>${BLOG_TITLE}</h1>
       <nav>
         <a href="index.html">Home</a>

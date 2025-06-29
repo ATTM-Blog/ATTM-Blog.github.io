@@ -3,9 +3,9 @@
 :root {
   --bg: #fdfdfd;
   --fg: #111;
-  --accent: #25555c;
+  --accent: #025555c;
   --font-size: 16px;
-  --font-weight: 400;
+  --font-weight: 300;
   --nav-bg: #e0e8f0;
 }
 body {
@@ -27,8 +27,8 @@ header, footer {
   flex-wrap: wrap;
 }
 header h1 {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
   margin: 0;
 }
 header img {
@@ -87,5 +87,21 @@ footer {
   }
   aside, main {
     width: 100%;
+  }
+}
+
+.tag-cloud span {
+  display: inline-block;
+  margin: 0.2rem;
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+  header h1 {
+    font-size: 1.6rem;
+  }
+  nav a {
+    margin: 0.5rem 0.5rem;
   }
 }
