@@ -14,7 +14,7 @@ const THEMES = {
     font: "'Montserrat', sans-serif",
     background: "#111",
     foreground: "#fdfdfd",
-    accent: "#0050b3",
+    accent: "##25555c",
     navBg: "#222"
   }
 };
@@ -32,8 +32,8 @@ function applyTheme(theme) {
   styleTag.innerHTML = `
     header, footer { background: ${t.accent}; }
     aside { background: ${t.navBg}; }
-    nav a { color: ${t.foreground}; background: rgba(255,255,255,0.1); }
-    nav a:hover { background: rgba(255,255,255,0.3); }
+    nav a { color: ${t.foreground}; background: rgba(189,204,206,0.5); }
+    nav a:hover { background: rgba(189,204,206,0.8); }
   `;
   if (!document.head.contains(styleTag)) document.head.appendChild(styleTag);
 }
