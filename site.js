@@ -8,7 +8,7 @@ const THEMES = {
     background: "#fdfdfd",
     foreground: "#111",
     accent: "#25555c",
-    navBg: "#e0e8f0"
+    navBg: "#bdccce"
   },
   dark: {
     font: "'Montserrat', sans-serif",
