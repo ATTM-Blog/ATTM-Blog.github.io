@@ -1,1 +1,137 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'></head><body><h1>Editor</h1></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog Post Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; max-width: 900px; margin: auto; padding: 2rem; background: #f9f9f9; }
+    h1 { font-family: "Courier New", monospace; color: #003d7c; }
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    input, textarea { width: 100%; padding: 0.5rem; font-size: 1rem; }
+    textarea { height: 150px; }
+    #preview { background: white; padding: 1rem; border: 1px solid #ccc; margin-top: 1rem; }
+    .buttons { margin-top: 1rem; }
+    button { padding: 0.5rem 1rem; font-size: 1rem; margin-right: 1rem; }
+    #drop-zone {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 2px dashed #999;
+      text-align: center;
+      background: #fff;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>Blog Post Editor</h1>
+
+  <div id="drop-zone">Drag & drop <code>posts.json</code> here or <input type="file" id="jsonFile" accept=".json" /></div>
+
+  <label>Title:</label>
+  <input type="text" id="title" />
+
+  <label>Date:</label>
+  <input type="date" id="date" />
+
+  <label>Tags (comma-separated):</label>
+  <input type="text" id="tags" />
+
+  <label>Content (Markdown):</label>
+  <textarea id="content"></textarea>
+
+  <label>Upload Image:</label>
+  <input type="file" id="imageUpload" accept="image/*" />
+  <div class="buttons">
+    <button onclick="insertImage()">Insert Image</button>
+    <button onclick="previewPost()">Preview</button>
+    <button onclick="addPost()">Add to JSON</button>
+    <button onclick="downloadJSON()">Download posts.json</button>
+  </div>
+
+  <label>Preview:</label>
+  <div id="preview"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    let posts = [];
+
+    document.getElementById('date').valueAsDate = new Date();
+
+    function insertImage() {
+      const fileInput = document.getElementById('imageUpload');
+      if (!fileInput.files.length) return alert('No file selected');
+      const file = fileInput.files[0];
+      const filename = file.name;
+      const link = `images/${filename}`;
+      const contentBox = document.getElementById('content');
+      contentBox.value += `\n\n![${filename}](${link})\n\n`;
+    }
+
+    function previewPost() {
+      const content = document.getElementById('content').value;
+      document.getElementById('preview').innerHTML = marked.parse(content);
+    }
+
+    function addPost() {
+      const title = document.getElementById('title').value.trim();
+      const date = document.getElementById('date').value;
+      const tags = document.getElementById('tags').value.split(',').map(t => t.trim()).filter(t => t);
+      const content = document.getElementById('content').value.replace(/"/g, '\"').replace(/\n/g, '\n');
+
+      if (!title || !date || !content) {
+        return alert("Please complete title, date and content.");
+      }
+
+      posts.push({ title, date, content, tags });
+      alert("Post added to JSON!");
+    }
+
+    function downloadJSON() {
+      const json = JSON.stringify(posts, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "posts.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('jsonFile').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      loadJSONFile(file);
+    });
+
+    document.getElementById('drop-zone').addEventListener('dragover', function(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+    });
+
+    document.getElementById('drop-zone').addEventListener('drop', function(e) {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      loadJSONFile(file);
+    });
+
+    function loadJSONFile(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const loadedPosts = JSON.parse(e.target.result);
+          if (Array.isArray(loadedPosts)) {
+            posts = loadedPosts;
+            alert("posts.json loaded successfully!");
+          } else {
+            alert("Invalid JSON format.");
+          }
+        } catch (err) {
+          alert("Error parsing JSON: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+  </script>
+</body>
+</html>
